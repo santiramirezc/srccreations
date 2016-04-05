@@ -31,7 +31,18 @@ io.on("connection",function(socket){
         console.log("State Changed: " + state);
         io.emit("updateState",state);
     });
+    
+    socket.on("solicitar",function(){
+        console.log("Se ha solicitado el estado")
+        io.emit("solicitando");
+    }); 
+    
+    socket.on("resultado",function(estado){
+        io.emit("estado",estado);
+    }); 
 });
+
+
 /**
  * Listen on provided port, on all network interfaces.
  */

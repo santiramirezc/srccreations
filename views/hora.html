@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitar hora y estado</title>
+</head>
+    
+<body>
+    <center><h2>Solicitar la hora y estado:</h2></center>
+    <center><button id="solicitar">Solicitar</button></center>
+    <center><div id="resultado"></div></center>
+    
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+    <script type="text/javascript">
+        var socket = io.connect("/");
+        //Solicitamos el estado del boton
+        $("#solicitar").on("click",function(){
+            socket.emit("solicitar"); 
+        });
+        //Se escucha el socket resultante
+        socket.on("estado",function(estado){
+            $("#resultado").html("Hora: " + estado.hora + "<br>" + "Estado: " + estado.estado);
+        });
+    </script>
+</body>
+</html>

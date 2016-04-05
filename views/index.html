@@ -25,6 +25,10 @@
 				</div>
 				
 			</section>
+            
+            <center><h2>Solicitar la hora y estado:</h2></center>
+    <center><button id="solicitar">Solicitar</button></center>
+    <center><div id="resultado"></div></center>
 			
         </div>
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -38,6 +42,12 @@
             });
             $("#interruptor").change(function(){
                 socket.emit("stateChanged",this.checked); 
+            });
+            $("#solicitar").on("click",function(){
+                socket.emit("solicitarestado","algo"); 
+            });
+            socket.on("estado",function(){
+                socket.emit("resultadoestado", $("#interruptor").this.checked); 
             });
         </script>
     </body>
